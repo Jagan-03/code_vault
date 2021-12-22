@@ -1,0 +1,16 @@
+.collectionRow {
+    background-color: rgba(0, 0, 0, 0.411);
+    cursor: pointer;
+}
+.collectionRow_title {
+    color: #00bcd4;
+}
+.collectionRow_title, .collectionRow_created {
+    border-right: 1px solid rgb(25, 25, 26);
+}
+.collectionRow_created, .collectionRow_updated {
+    border-left: 1px solid rgb(25, 25, 26);
+}
+.collectionRow:hover {
+    background-color: black;
+}

@@ -1,0 +1,12 @@
+.codeEditor {
+    margin: 0;
+    margin-top: 70px;
+}
+.codeEditor_topPane {
+    height: calc(50vh - 40px);
+}
+.codeEditor_display {
+    height: calc(50vh - 40px);
+    overflow: hidden;
+    word-wrap: break-word;
+}
