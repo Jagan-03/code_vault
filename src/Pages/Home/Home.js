@@ -15,10 +15,8 @@ const Home = ({ open, gridView, handleRecordsView }) => {
   const [value, setValue] = React.useState(
     path === "records"
       ? "one"
-      : path === "collections"
-      ? "two"
       : path === "deleted"
-      ? "three"
+      ? "two"
       : ""
   );
 
@@ -27,10 +25,6 @@ const Home = ({ open, gridView, handleRecordsView }) => {
   };
 
   const history = useHistory();
-
-  // const [modalOpen, setModalOpen] = React.useState(false);
-  //   const handleOpen = () => setModalOpen(true);
-  //   const handleClose = () => setModalOpen(false);
 
   const addNewRecord = () => {
     history.push("/create");
@@ -53,12 +47,6 @@ const Home = ({ open, gridView, handleRecordsView }) => {
           />
           <Tab
             value="two"
-            className="text-light"
-            label="Collections"
-            onClick={() => history.push("/collections")}
-          />
-          <Tab
-            value="three"
             className="text-light"
             label="Trash Bin"
             onClick={() => history.push("/deleted")}

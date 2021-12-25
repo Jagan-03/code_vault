@@ -18,6 +18,7 @@ const Editor = ({displayName, language, value, onChange}) => {
     <div className="editor w-100">
       <div className="editor_header text-light">
           {displayName}
+
       </div>
       <ControlledEditor 
           onBeforeChange={handleChange}

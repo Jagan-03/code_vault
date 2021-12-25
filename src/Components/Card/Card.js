@@ -5,11 +5,31 @@ import Link from '@mui/material/Link';
 
 
 import "./card.css";
+import { useHistory } from "react-router-dom";
+import { addToTrash } from "../../actions/trash";
+import { useDispatch } from "react-redux";
 
-const Card = ({title, description, srcDoc, index}) => {
+const Card = ({record, title, description, html, css, js, recordId}) => {
+  
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [srcDoc, setSrcDoc] = React.useState("")
+
+  React.useEffect(() =>{
+    setSrcDoc(`
+            <html>
+                <body>${html}</body>
+                <style>${css}</style>
+                <script>${js}</script>
+            </html>
+        `);
+  }, [html, css, js])
 
   const editRecord = () => {
-    
+    history.push(`/create/${recordId}`);
+  }
+  const moveToTrash = () => {
+    dispatch(addToTrash(record));
   }
 
   return (
@@ -38,13 +58,10 @@ const Card = ({title, description, srcDoc, index}) => {
           <MoreHorizIcon />
             </Link>
             <ul class="dropdown-menu">
-              <li className="dropdown-item">
-                Add to collection
-              </li>
               <li className="dropdown-item" onClick={editRecord}>
                 Edit Record
               </li>
-              <li className="dropdown-item">
+              <li className="dropdown-item" onClick={moveToTrash}>
                 Delete Record
               </li>
             </ul>

@@ -7,7 +7,7 @@ import { Divider, IconButton, ListItemIcon, Menu, MenuItem, TextField } from "@m
 import MenuIcon from '@mui/icons-material/Menu';
 import { useHistory } from "react-router-dom";
 
-const Navbar = ({editorNav, handleSave, handleCancel}) => {
+const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCancel}) => {
   const [screenWidth, setScreenWidth] = React.useState(500);
 
   React.useEffect(() => {
@@ -31,6 +31,10 @@ const Navbar = ({editorNav, handleSave, handleCancel}) => {
   const [title, setTitle] = React.useState("");
   const [ description, setDescription] = React.useState("");
   
+  React.useEffect(() => {
+    setTitle(recordTitle);
+    setDescription(recordDescription);
+  }, [recordTitle, recordDescription])
 
   return (
     <div className="navbar ps-3 px-3">

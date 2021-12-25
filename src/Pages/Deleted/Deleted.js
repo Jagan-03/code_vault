@@ -1,5 +1,6 @@
 import React from 'react'
-import Card from '../../Components/Card/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTrash } from '../../actions/trash';
 import CollectionRow from '../Collections/CollectionRow/CollectionRow';
 import "./deleted.css";
 
@@ -7,43 +8,38 @@ const Deleted = ({gridView}) => {
 
     const [screenWidth, setScreenWidth] = React.useState(600);
 
+    const dispatch = useDispatch();
+
     React.useEffect(() => {
         window.addEventListener("resize", () => {
             setScreenWidth(window.screen.width);
         })
-    }, [])
+        dispatch(getTrash());
+      }, [dispatch]);
+
+    const { loading, trash } = useSelector(state => state.getTrash);
 
     return (
-        <div className="deleted" id="deleted">
+        <div className="deleted text-center" id="deleted">
+            {
+              trash.length !== 0 ? 
             <div className="container">
-            {gridView ? (
-          <div className="row">
-            {[...Array(5)].map((ele, index) => {
-              return (
-                <div className="col-md-4 p-3" key={index}>
-                  <Card />
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <>
+            
             {screenWidth >= 576 ? (
-              <div className="collectionRow_title row text-light">
+              <div className="collectionRow_title row text-light text-start">
                 <div className="col-sm-6 p-2">Title</div>
-                <div className="col-sm-3 p-2">Created at</div>
-                <div className="col-sm-3 p-2">Last Updated</div>
+                <div className="col-sm-3 p-2 text-center">Restore</div>
+                <div className="col-sm-3 p-2 text-center">Delete</div>
               </div>
             ) : (
               <></>
             )}
 
-            {[...Array(5)].map((ele) => (
-              <CollectionRow />
+            {!loading && trash.map((record) => (
+              <CollectionRow record={record} trash/>
             ))}
-          </>
-        )}
-            </div>
+            </div> : <h1 className="display-1">No items in the trash</h1>
+            }
         </div>
     )
 }

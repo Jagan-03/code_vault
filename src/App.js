@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { getRecords } from "./actions/records";
 import './App.css';
 import Navbar from "./Components/Navbar/Navbar";
 import CodeEditor from "./Pages/CodeEditor/CodeEditor";
-import Collections from "./Pages/Collections/Collections";
 import Deleted from "./Pages/Deleted/Deleted";
 import Home from "./Pages/Home/Home";
 import Records from "./Pages/Records/Records";
@@ -16,7 +17,7 @@ function App() {
       const handleRecordsView = (data) => {
         setGridView(data);
       }
-  const Layout = ({children, open, handleRecordsView, gridView}) => {
+    const Layout = ({children, open, handleRecordsView, gridView}) => {
 
     return (
       <div className="layout">
@@ -28,13 +29,11 @@ function App() {
     )
   }
 
-  const [records, setRecords] = React.useState([]);
+  const dispatch = useDispatch();
 
-  const addRecord = (newRecord) => {
-    let previousRecords = [...records]; 
-    
-    setRecords([...records, newRecord]);
-  }
+  React.useEffect(() => {
+    dispatch(getRecords());
+  }, [dispatch])
 
   return (
     <div className="app">
@@ -45,18 +44,16 @@ function App() {
               <Deleted gridView={gridView}/>
             </Layout>
           </Route>
-        <Route path="/collections">
-            <Layout handleRecordsView={handleRecordsView} open={open} gridView={gridView}>
-              <Collections gridView={gridView} />
-            </Layout>
-          </Route>
           <Route path="/records">
             <Layout handleRecordsView={handleRecordsView} open={open} gridView={gridView}>
-              <Records records={records} gridView={gridView}/>
+              <Records gridView={gridView}/>
             </Layout>
           </Route>
+          <Route path="/create/:id">
+            <CodeEditor />
+          </Route>
           <Route path="/create">
-            <CodeEditor addRecord={addRecord}/>
+            <CodeEditor />
           </Route>
           <Route path="*">
             <Redirect to="/" />
