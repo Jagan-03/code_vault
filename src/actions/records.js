@@ -16,6 +16,7 @@ export const getRecordById = (id) => async (dispatch) => {
         dispatch({type : "EDIT_RECORD_REQUEST"});
         const { data } = await request(`/records/${id}`);
         dispatch({type : "EDIT_RECORD_SUCCESS", payload : data[0]})
+        dispatch(getRecords());
     } catch (error) {
         console.log(error);
         dispatch({type : "EDIT_RECORD_FAIL", payload : error})
