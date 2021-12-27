@@ -11,20 +11,18 @@ import Records from "./Pages/Records/Records";
 import AuthScreen from "./Pages/Auth/Auth";
 
 function App() {
-  
-      const [open, setOpen] = React.useState(false);
-      const [gridView, setGridView] = React.useState(true);
+        const [gridView, setGridView] = React.useState(true);
 
       const handleRecordsView = (data) => {
         setGridView(data);
       }
-    const Layout = ({children, open, handleRecordsView, gridView}) => {
+    const Layout = ({children, handleRecordsView, gridView}) => {
 
     return (
       <div className="layout">
         <Navbar />
         {/* <Sidebar open={open}/> */}
-        <Home open={open} gridView={gridView} handleRecordsView={handleRecordsView}/>
+        <Home gridView={gridView} handleRecordsView={handleRecordsView}/>
         {children}
       </div>
     )
@@ -43,12 +41,12 @@ function App() {
       <Router>
         <Switch>
         <Route path="/deleted">
-            <Layout handleRecordsView={handleRecordsView} open={open} gridView={gridView}>
+            <Layout handleRecordsView={handleRecordsView} gridView={gridView}>
               <Deleted gridView={gridView}/>
             </Layout>
           </Route>
           <Route path="/records">
-            <Layout handleRecordsView={handleRecordsView} open={open} gridView={gridView}>
+            <Layout handleRecordsView={handleRecordsView} gridView={gridView}>
               <Records gridView={gridView}/>
             </Layout>
           </Route>

@@ -1,4 +1,4 @@
-import { CardContent, CardMedia, Typography } from "@mui/material";
+import { CardContent, Typography } from "@mui/material";
 import React from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Link from '@mui/material/Link';

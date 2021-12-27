@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addRecord } from "../../../actions/records";
-import { getTrash, removeFromTrash } from "../../../actions/trash";
+import {removeFromTrash } from "../../../actions/trash";
 
 import "./collectionRow.css";
 const CollectionRow = ({record, trash}) => {

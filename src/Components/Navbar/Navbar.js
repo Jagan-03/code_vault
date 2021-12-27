@@ -3,8 +3,7 @@ import React from "react";
 import "./navbar.css";
 
 import Avatar from "@mui/material/Avatar";
-import { Divider, IconButton, ListItemIcon, Menu, MenuItem, TextField } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
+import { Divider, IconButton, Menu, MenuItem } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 

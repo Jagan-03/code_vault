@@ -4,11 +4,9 @@ import "./home.css";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Navbar from "../../Components/Navbar/Navbar";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import RecordModal from "../../Components/RecordModal/RecordModal";
+import { useHistory, useLocation } from "react-router-dom";
 
-const Home = ({ open, gridView, handleRecordsView }) => {
+const Home = ({gridView, handleRecordsView }) => {
   const { pathname } = useLocation();
   const path = pathname.replace("/", "");
   
