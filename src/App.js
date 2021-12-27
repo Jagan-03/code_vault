@@ -8,6 +8,7 @@ import CodeEditor from "./Pages/CodeEditor/CodeEditor";
 import Deleted from "./Pages/Deleted/Deleted";
 import Home from "./Pages/Home/Home";
 import Records from "./Pages/Records/Records";
+import AuthScreen from "./Pages/Auth/Auth";
 
 function App() {
   
@@ -35,6 +36,8 @@ function App() {
     dispatch(getRecords());
   }, [dispatch])
 
+  
+
   return (
     <div className="app">
       <Router>
@@ -54,6 +57,9 @@ function App() {
           </Route>
           <Route path="/create">
             <CodeEditor />
+          </Route>
+          <Route path="/">
+            <AuthScreen />
           </Route>
           <Route path="*">
             <Redirect to="/" />

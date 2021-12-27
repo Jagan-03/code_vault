@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import { Divider, IconButton, ListItemIcon, Menu, MenuItem, TextField } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useHistory } from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCancel}) => {
   const [screenWidth, setScreenWidth] = React.useState(500);
@@ -100,11 +101,8 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
           <MenuItem>
             New Record
           </MenuItem>
-          <MenuItem>
-            New Collection
-          </MenuItem>
           <Divider />
-          <MenuItem>
+          <MenuItem onClick={() => Auth.signOut()}>
             Logout
           </MenuItem>
         </Menu>

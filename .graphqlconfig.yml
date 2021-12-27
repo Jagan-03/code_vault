@@ -1,0 +1,12 @@
+projects:
+  codevault:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - record.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: .
