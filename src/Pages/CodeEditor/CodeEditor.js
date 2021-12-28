@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./codeEditor.css";
 import Editor from "./Editor/Editor";
-import { addRecord, getRecordById, updateRecord } from "../../actions/records";
+import { getRecordById } from "../../actions/records";
+import { API, graphqlOperation } from "aws-amplify";
+import { createRecord, updateRecord } from "../../graphql/mutations";
 
 const CodeEditor = () => {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ const CodeEditor = () => {
   }, [dispatch, id]);
   
   const { record } = useSelector(state => state.getRecordById);
+  const { user } = useSelector(state => state.getUser);
 
   const [html, setHtml] = React.useState("");
   const [css, setCss] = React.useState("");
@@ -43,8 +46,9 @@ const CodeEditor = () => {
     return () => clearTimeout(timeOut);
   }, [html, css, js]);
   
-  const handleSave = ({title, description}) => {
+  const handleSave = async ({title, description}) => {
     const newRecord = {
+      userId : user.username,
       title : title,
       description : description,
       html : html,
@@ -53,10 +57,19 @@ const CodeEditor = () => {
       createdAt : record ? record.createdAt : (new Date()).toString(),
       lastUpdated : (new Date()).toString()
     }
-    if(!record) dispatch(addRecord(newRecord));
-    else dispatch(updateRecord(newRecord, id));
-    dispatch({type : "EDIT_RECORD_REMOVE"});
-    history.push("/records");
+    // if(!record) dispatch(addRecord(newRecord));
+    // else dispatch(updateRecord(newRecord, id));
+    try {
+      if(!record) {
+        await API.graphql(graphqlOperation(createRecord, { input : newRecord }));
+      } else {
+        await API.graphql({ query: updateRecord, variables: {input: { id : id, ...newRecord}}});
+      }
+      history.push("/records");
+      dispatch({type : "EDIT_RECORD_REMOVE"});
+    } catch (error) {
+      console.log(error);
+    }
   } 
 
   

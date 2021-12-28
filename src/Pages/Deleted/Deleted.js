@@ -9,13 +9,14 @@ const Deleted = ({gridView}) => {
     const [screenWidth, setScreenWidth] = React.useState(600);
 
     const dispatch = useDispatch();
+    const { user } = useSelector(state => state.getUser);
 
     React.useEffect(() => {
         window.addEventListener("resize", () => {
             setScreenWidth(window.screen.width);
         })
-        dispatch(getTrash());
-      }, [dispatch]);
+        dispatch(getTrash(user?.username));
+      }, [dispatch, user]);
 
     const { loading, trash } = useSelector(state => state.getTrash);
 

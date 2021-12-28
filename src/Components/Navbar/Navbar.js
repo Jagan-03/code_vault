@@ -56,7 +56,7 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
           </div>
         ) : (
           <div className="navbar_profile_search">
-          <input type="text" placeholder="Search Code vault" />
+          <input type="text" placeholder="Search by title..."/>
         </div>
         )}
         

@@ -1,48 +1,51 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { getRecords } from "./actions/records";
-import './App.css';
+import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import CodeEditor from "./Pages/CodeEditor/CodeEditor";
 import Deleted from "./Pages/Deleted/Deleted";
 import Home from "./Pages/Home/Home";
 import Records from "./Pages/Records/Records";
 import AuthScreen from "./Pages/Auth/Auth";
+import { getUser } from "./actions/user";
 
 function App() {
-        const [gridView, setGridView] = React.useState(true);
+  const [gridView, setGridView] = React.useState(true);
 
-      const handleRecordsView = (data) => {
-        setGridView(data);
-      }
-    const Layout = ({children, handleRecordsView, gridView}) => {
-
+  const handleRecordsView = (data) => {
+    setGridView(data);
+  };
+  const Layout = ({ children, handleRecordsView, gridView }) => {
     return (
       <div className="layout">
         <Navbar />
         {/* <Sidebar open={open}/> */}
-        <Home gridView={gridView} handleRecordsView={handleRecordsView}/>
+        <Home gridView={gridView} handleRecordsView={handleRecordsView} />
         {children}
       </div>
-    )
-  }
+    );
+  };
 
   const dispatch = useDispatch();
-
   React.useEffect(() => {
     dispatch(getRecords());
-  }, [dispatch])
-
-  
+    dispatch(getUser());
+  }, [dispatch]);
 
   return (
     <div className="app">
       <Router>
         <Switch>
-        <Route path="/deleted">
+          <Route path="/deleted">
             <Layout handleRecordsView={handleRecordsView} gridView={gridView}>
-              <Deleted gridView={gridView}/>
+              <Deleted gridView={gridView} />
             </Layout>
           </Route>
           <Route path="/records">

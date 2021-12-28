@@ -12,15 +12,16 @@ const Records = ({ gridView }) => {
     const [screenWidth, setScreenWidth] = React.useState(600);
 
     const {records} = useSelector(state => state.getRecords);
-
+    const { user } = useSelector(state => state.getUser);
+    
     const dispatch = useDispatch();
 
     React.useEffect(() => {
         window.addEventListener("resize", () => {
             setScreenWidth(window.screen.width);
         });
-        dispatch(getRecords());
-    }, [dispatch])
+        dispatch(getRecords(user?.username));
+    }, [dispatch, user])
 
 
 
@@ -29,10 +30,10 @@ const Records = ({ gridView }) => {
       <div className="container">
         {gridView ? (
           <div className="row">
-            {records?.map((record, index) => {
+            {records?.map((record) => {
               return (
-                <div className="col-md-4 p-3" key={record._id}>
-                  <Card record={record} title={record.title} description={record.description} html={record.html} css={record.css} js={record.js} recordId={record._id}/>
+                <div className="col-md-4 p-3" key={record.id}>
+                  <Card record={record} title={record.title} description={record.description} html={record.html} css={record.css} js={record.js} recordId={record.id}/>
                 </div>
               );
             })}
