@@ -2,7 +2,6 @@ import React from "react";
 import Card from "../../Components/Card/Card";
 import CollectionRow from "../Collections/CollectionRow/CollectionRow";
 import { useSelector, useDispatch } from "react-redux";
-import CircularProgress from '@mui/material/CircularProgress';
 
 
 import { getRecords } from "../../actions/records";

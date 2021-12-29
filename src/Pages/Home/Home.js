@@ -24,10 +24,6 @@ const Home = ({gridView, handleRecordsView }) => {
 
   const history = useHistory();
 
-  const addNewRecord = () => {
-    history.push("/create");
-  }
-
   return (
     <div className="home" id="main">
       <div className="home_header container">
