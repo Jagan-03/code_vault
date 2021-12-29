@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import { Divider, IconButton, Menu, MenuItem } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import { useSelector } from "react-redux";
 
 const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCancel}) => {
   const [screenWidth, setScreenWidth] = React.useState(500);
@@ -30,11 +31,16 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
   
   const [title, setTitle] = React.useState("");
   const [ description, setDescription] = React.useState("");
+  const { user } = useSelector(state => state.getUser);
   
   React.useEffect(() => {
     setTitle(recordTitle);
     setDescription(recordDescription);
   }, [recordTitle, recordDescription])
+
+  const addNewRecord = () => {
+    history.push("/create");
+  }
 
   return (
     <div className="navbar ps-3 px-3">
@@ -48,20 +54,25 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
         ) : (<></>)}
                
       </div>
-      <div className="navbar_profile">
+      <div className="navbar_profile d-flex align-items-center justify-content-end">
         {editorNav ? (
           <div className="navbar_editRecord justify-content-end d-flex">
             <button className="btn btn-dark" onClick={() => handleSave({title, description})}>Save</button>
             <button className="btn btn-outline-dark ms-2" onClick={handleCancel}>Cancel</button>
           </div>
         ) : (
-          <div className="navbar_profile_search">
-          <input type="text" placeholder="Search by title..."/>
-        </div>
+          <div className="navbar_profile_new">
+          <button
+          onClick={addNewRecord}
+            class="btn btn-sm btn-secondary"
+          >
+            New record
+          </button>
+          </div>
         )}
         
         <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+              <i class="fas fa-user-alt"></i>
         </IconButton>
         <Menu
           anchorEl={anchorEl}
@@ -98,11 +109,16 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           <MenuItem>
-            New Record
+            <div className="d-flex flex-column align-items-center justify-content-center">
+              <Avatar alt={user?.attributes?.name} src={user?.attributes?.picture} />
+              <h6 className="mt-2">{user?.attributes?.name}</h6>
+            </div>
           </MenuItem>
           <Divider />
           <MenuItem onClick={() => Auth.signOut()}>
-            Logout
+            <div className="text-center w-100">
+              Logout <i className="fas fa-sign-out-alt text-danger ms-2"></i>
+            </div>
           </MenuItem>
         </Menu>
       </div>

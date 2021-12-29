@@ -67,7 +67,7 @@ const Card = ({record, title, description, html, css, js, recordId}) => {
             </ul>
           </div>
         </div>
-        <div className="card_details_description">
+        <div className="card_details_description text-start">
           <Typography
             variant="body2"
             color="text.secondary"

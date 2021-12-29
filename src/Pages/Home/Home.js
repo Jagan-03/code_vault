@@ -63,17 +63,6 @@ const Home = ({gridView, handleRecordsView }) => {
           </button>{" "}
           <span className="text-white-50">LIST</span>
         </div>
-        <div className="home_header_create">
-        { path === "deleted" ? <></> :
-          <button
-          onClick={addNewRecord}
-            class="btn btn-sm btn-secondary"
-          >
-            New record
-          </button>
-        }
-        {/* <RecordModal open={modalOpen} handleClose={handleClose}/> */}
-        </div>
       </div>
     </div>
   );

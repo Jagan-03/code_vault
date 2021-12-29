@@ -22,6 +22,8 @@ function App() {
   const handleRecordsView = (data) => {
     setGridView(data);
   };
+  
+
   const Layout = ({ children, handleRecordsView, gridView }) => {
     return (
       <div className="layout">
@@ -50,7 +52,7 @@ function App() {
           </Route>
           <Route path="/records">
             <Layout handleRecordsView={handleRecordsView} gridView={gridView}>
-              <Records gridView={gridView}/>
+              <Records gridView={gridView} />
             </Layout>
           </Route>
           <Route path="/create/:id">
