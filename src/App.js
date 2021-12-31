@@ -41,6 +41,7 @@ function App() {
     dispatch(getUser());
   }, [dispatch]);
 
+
   return (
     <div className="app">
       <Router>

@@ -32,6 +32,8 @@ const CodeEditor = () => {
     setJs(record ? record.js : "");
   }, [record])
 
+  
+
   React.useEffect(() => {
     const timeOut = setTimeout(() => {
       setSrcDoc(`
@@ -80,6 +82,55 @@ const CodeEditor = () => {
       history.push("/records");
     }
   }
+  const [screenWidth, setScreenWidth] = React.useState(700);
+
+  const [htmlExpand, setHtmlExpand] = React.useState(true);
+  const [cssExpand, setCssExpand] = React.useState(true);
+  const [jsExpand, setJsExpand] = React.useState(true);
+  
+
+  React.useEffect(() => {
+    window.addEventListener("resize", () => {
+        setScreenWidth(window.screen.width);
+    });
+}, [])
+
+React.useEffect(() => {
+  if(screenWidth < 700) {
+    setHtmlExpand(true);
+    setCssExpand(false);
+    setJsExpand(false);
+  }
+}, [screenWidth])
+
+  const toggleEditor = (name) => {
+    if(screenWidth < 700) {
+      if(name === "HTML") {
+        setHtmlExpand(true);
+        setCssExpand(false);
+        setJsExpand(false);
+      } else if(name === "CSS") {
+        setHtmlExpand(false);
+        setCssExpand(true);
+        setJsExpand(false);
+      } else {
+        setHtmlExpand(false);
+        setCssExpand(false);
+        setJsExpand(true);
+      } 
+    } else {
+      if(name === "HTML") {
+        if(!cssExpand && !jsExpand) setHtmlExpand(true);
+        else setHtmlExpand(!htmlExpand);
+      } else if(name === "CSS") {
+        if(!htmlExpand && !jsExpand) setCssExpand(true);
+        else setCssExpand(!cssExpand);
+      } else {
+        if(!htmlExpand && !cssExpand) setJsExpand(true);
+        else setJsExpand(!jsExpand);
+      } 
+    }
+  }
 
   return (
     <div className="codeEditor">
@@ -90,18 +141,24 @@ const CodeEditor = () => {
           displayName="HTML"
           value={html}
           onChange={setHtml}
+          expand={htmlExpand}
+          toggleEditor={toggleEditor}
         />
         <Editor
           language="css"
           displayName="CSS"
           value={css}
           onChange={setCss}
+          expand={cssExpand}
+          toggleEditor={toggleEditor}
         />
         <Editor
           language="javascript"
           displayName="JS"
           value={js}
           onChange={setJs}
+          expand={jsExpand}
+          toggleEditor={toggleEditor}
         />
       </div>
       <div className="codeEditor_display">

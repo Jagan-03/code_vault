@@ -2,3 +2,11 @@
     padding: 2px;
     overflow: hidden;
 }
+.editorExpand {
+    width: calc(100% - 60px);
+    transition: .5s;
+}
+.editorCollapse {
+    width: 60px;
+    transition: .5s;
+}

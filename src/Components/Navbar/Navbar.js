@@ -56,9 +56,9 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
       </div>
       <div className="navbar_profile d-flex align-items-center justify-content-end">
         {editorNav ? (
-          <div className="navbar_editRecord justify-content-end d-flex">
-            <button className="btn btn-dark" onClick={() => handleSave({title, description})}>Save</button>
-            <button className="btn btn-outline-dark ms-2" onClick={handleCancel}>Cancel</button>
+          <div className="navbar_editRecord justify-content-end d-flex flex-wrap">
+            <button className="btn btn-dark btn-sm mx-2" onClick={() => handleSave({title, description})}>Save</button>
+            <button className="btn btn-outline-dark btn-sm" onClick={handleCancel}>Cancel</button>
           </div>
         ) : (
           <div className="navbar_profile_new">
@@ -70,8 +70,8 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
           </button>
           </div>
         )}
-        
-        <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+        {!editorNav && <>
+          <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
               <i class="fas fa-user-alt"></i>
         </IconButton>
         <Menu
@@ -121,6 +121,8 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
             </div>
           </MenuItem>
         </Menu>
+        </> }
+        
       </div>
     </div>
   );

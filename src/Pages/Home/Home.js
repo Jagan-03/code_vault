@@ -47,6 +47,8 @@ const Home = ({gridView, handleRecordsView }) => {
           />
         </Tabs>
       </div>
+      {
+        path === "records" ?
       <div className="home_header_actions container p-2 px-4 ps-4 d-flex flex-wrap align-items-center justify-content-between bg-black">
         <div className="home_header_view">
           <span className="text-white-50">GRID</span>{" "}
@@ -59,7 +61,8 @@ const Home = ({gridView, handleRecordsView }) => {
           </button>{" "}
           <span className="text-white-50">LIST</span>
         </div>
-      </div>
+      </div> : <></>
+      }
     </div>
   );
 };

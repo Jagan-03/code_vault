@@ -42,14 +42,13 @@ const Records = ({ gridView}) => {
         
         gridView ? (
           <div className="row">
-            {!loading && records.map((record) => {
+            {loading ? <>Loading...</>: records.map((record) => {
               return (
+                record.title.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && 
                 <div className="col-md-4 p-3" key={record.id}>
-                  {
-                    record.title.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && <Card record={record} title={record.title} description={record.description} html={record.html} css={record.css} js={record.js} recordId={record.id}/>
-                  }
-                  
+                    <Card record={record} title={record.title} description={record.description} html={record.html} css={record.css} js={record.js} recordId={record.id}/>  
                 </div>
+                
               );
             })}
           </div>
