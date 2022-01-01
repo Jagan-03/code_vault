@@ -1,6 +1,5 @@
 .card {
     height: 300px;
-    cursor : pointer;
     transition: .5s;
 }
 .card_display {

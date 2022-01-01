@@ -1,7 +1,5 @@
 import { CardContent, Typography } from "@mui/material";
 import React from "react";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import Link from '@mui/material/Link';
 
 
 import "./card.css";
@@ -9,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { addToTrash } from "../../actions/trash";
 import { useDispatch } from "react-redux";
 
-const Card = ({record, title, description, html, css, js, recordId}) => {
+const Card = ({record, title, description, html, css, js, recordId,toggleRecord}) => {
   
   const history = useHistory();
   const dispatch = useDispatch();
@@ -30,10 +28,11 @@ const Card = ({record, title, description, html, css, js, recordId}) => {
   }
   const moveToTrash = () => {
     dispatch(addToTrash(record));
-  }
+  } 
 
+  
   return (
-    <div className="card">
+    <div className="card" >
       <iframe
           srcDoc={srcDoc}
           title="output"
@@ -48,23 +47,16 @@ const Card = ({record, title, description, html, css, js, recordId}) => {
           <Typography variant="h6" color="text.secondary" className="m-0 p-0">
             {title}
           </Typography>
-          <div class="dropup">
-            <Link
-            component="button"
-            className="text-dark"
-              data-mdb-toggle="dropdown"
-              aria-expanded="false"
-            >
-          <MoreHorizIcon />
-            </Link>
-            <ul class="dropdown-menu">
-              <li className="dropdown-item" onClick={editRecord}>
-                Edit Record
-              </li>
-              <li className="dropdown-item" onClick={moveToTrash}>
-                Delete Record
-              </li>
-            </ul>
+          <div className="actions">
+          <button className="btn btn-dark btn-floating ms-2 btn-sm" onClick={() => toggleRecord(true, record)}>
+            <i className="fas fa-eye"></i>
+          </button>
+          <button className="btn btn-dark btn-floating ms-2 btn-sm" onClick={editRecord}>
+            <i className="fas fa-edit"></i>
+          </button>
+          <button className="btn btn-dark btn-floating ms-2 btn-sm" onClick={moveToTrash}>
+            <i className="fas fa-trash-alt"></i>
+          </button>
           </div>
         </div>
         <div className="card_details_description text-start">

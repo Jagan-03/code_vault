@@ -59,6 +59,9 @@ function App() {
           <Route path="/create/:id">
             <CodeEditor />
           </Route>
+          <Route path="/view/:id">
+            <CodeEditor />
+          </Route>
           <Route path="/create">
             <CodeEditor />
           </Route>

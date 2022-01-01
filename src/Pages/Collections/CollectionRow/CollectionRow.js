@@ -5,7 +5,7 @@ import {removeFromTrash } from "../../../actions/trash";
 import { createRecord } from "../../../graphql/mutations";
 
 import "./collectionRow.css";
-const CollectionRow = ({record, trash}) => {
+const CollectionRow = ({record, trash, toggleRecord}) => {
   
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ const CollectionRow = ({record, trash}) => {
     dispatch(removeFromTrash(record.id, record.userId));
   }
 
-  return <div className="collectionRow row mb-1 text-white-50 text-start">
+  return <div className="collectionRow row mb-1 text-white-50 text-start" onClick={() => toggleRecord(true, record)}>
     <div className="col-sm-6 collectionRow_title p-2">{record.title}</div>
     <div className="col-sm-3 collectionRow_updated p-2 text-center align-items-center d-flex justify-content-center">{trash ? <button className="btn btn-success btn-sm" onClick={restoreRecord}><i class="fas fa-recycle fa-2x"></i></button> : <p className="m-0 p-0 timestamps">{record.createdAt}</p>}</div>
     <div className="col-sm-3 collectionRow_updated p-2 text-center align-items-center d-flex justify-content-center">{trash ? <button className="btn btn-danger btn-sm" onClick={deleteRecord}><i class="far fa-trash-alt fa-2x"></i></button> : <p className="m-0 p-0 timestamps">{record.lastUpdated}</p>}</div>
