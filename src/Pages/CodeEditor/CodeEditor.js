@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-
+import $ from "jquery";
 import "./codeEditor.css";
 import Editor from "./Editor/Editor";
 import { getRecordById } from "../../actions/records";
@@ -132,6 +132,10 @@ React.useEffect(() => {
     }
   }
 
+  React.useEffect(() => {
+    $("#codeEditor_iframe").contents().find("body").css("word-wrap", "break-word");
+  }, [])
+
   return (
     <div className="codeEditor">
       <Navbar editorNav recordTitle={record?.title} recordDescription={record?.description} handleSave={handleSave} handleCancel={handleCancel}/>
@@ -163,10 +167,11 @@ React.useEffect(() => {
       </div>
       <div className="codeEditor_display">
         <iframe
+          id="codeEditor_iframe"
           srcDoc={srcDoc}
           title="output"
           sandbox="allow-scripts"
-          frameborder="0"
+          frameBorder="0"
           width="100%"
           height="100%"
           className="bg-light codeEditor_iframe"

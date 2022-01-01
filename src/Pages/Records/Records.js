@@ -10,14 +10,14 @@ import "./records.css";
 
 const Records = ({ gridView}) => {
 
-    const [screenWidth, setScreenWidth] = React.useState(600);
+    const [screenWidth, setScreenWidth] = React.useState(window.screen.width);
     const [searchKey, setSearchKey] = React.useState("");
 
     const {records, loading} = useSelector(state => state.getRecords);
     const { user } = useSelector(state => state.getUser);
     
     const dispatch = useDispatch();
-
+    
     React.useEffect(() => {
         window.addEventListener("resize", () => {
             setScreenWidth(window.screen.width);

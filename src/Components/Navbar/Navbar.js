@@ -45,11 +45,11 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
   return (
     <div className="navbar ps-3 px-3">
       <div className="navbar_logo d-flex align-items-center">
-        {screenWidth <= 410 ? <></> : <h5 className="navbar_logo_home" onClick={() => history.push("/records")}>Code</h5>}
+        {screenWidth <= 410 && editorNav ? <></> : <h5 className="navbar_logo_home text-light" onClick={handleCancel}><i className="fas fa-code text-secondary"></i> {!editorNav && "vault"}</h5>}
         {editorNav ? (
           <div className="d-flex flex-column ms-4 w-100">
-          <input label="Title" value={title} onChange={(e) => setTitle(e.target.value)} className="border-0 record-info" placeholder="Title  🖉"/>
-          <input label="Description" value={description} onChange={(e) => setDescription(e.target.value)} className=" border-0 record-info" placeholder="description  🖉"/>
+          <input label="Title" value={title} onChange={(e) => setTitle(e.target.value)} className="border-0 record-info bg-black text-light" placeholder="Title  🖉"/>
+          <input label="Description" value={description} onChange={(e) => setDescription(e.target.value)} className="border-0 record-info bg-black text-light" placeholder="description  🖉"/>
         </div>
         ) : (<></>)}
                
@@ -57,8 +57,8 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
       <div className="navbar_profile d-flex align-items-center justify-content-end">
         {editorNav ? (
           <div className="navbar_editRecord justify-content-end d-flex flex-wrap">
-            <button className="btn btn-dark btn-sm mx-2" onClick={() => handleSave({title, description})}>Save</button>
-            <button className="btn btn-outline-dark btn-sm" onClick={handleCancel}>Cancel</button>
+            <button className="btn btn-light btn-sm mx-2" onClick={() => handleSave({title, description})}>Save</button>
+            <button className="btn btn-dark btn-sm" onClick={handleCancel}>Cancel</button>
           </div>
         ) : (
           <div className="navbar_profile_new">
@@ -72,7 +72,7 @@ const Navbar = ({editorNav, recordTitle, recordDescription, handleSave, handleCa
         )}
         {!editorNav && <>
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-              <i class="fas fa-user-alt"></i>
+              <i className="fas fa-user-alt text-light"></i>
         </IconButton>
         <Menu
           anchorEl={anchorEl}

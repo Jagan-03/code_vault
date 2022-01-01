@@ -6,8 +6,8 @@ import "./deleted.css";
 
 const Deleted = ({gridView}) => {
 
-    const [screenWidth, setScreenWidth] = React.useState(600);
-
+    const [screenWidth, setScreenWidth] = React.useState(window.screen.width);
+    
     const dispatch = useDispatch();
     const { user } = useSelector(state => state.getUser);
 
