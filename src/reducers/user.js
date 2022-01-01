@@ -8,7 +8,7 @@ export const getUser = (user = {
         case "GET_USER_SUCCESS":
             return {...user, loading : false, user : action.payload};
         case "GET_USER_FAIL":
-            return {...user, loading : false, error : action.payload}   
+            return {...user, loading : false, error : action.payload, user : null}   
         default : 
             return user;        
     }  

@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
+  useHistory,
 } from "react-router-dom";
 import { getRecords } from "./actions/records";
 import "./App.css";
@@ -17,13 +18,22 @@ import AuthScreen from "./Pages/Auth/Auth";
 import { getUser } from "./actions/user";
 
 function App() {
+
+  const { user } = useSelector(state => state.getUser);
+  const history = useHistory();
+
+  React.useEffect(() => {
+    if(!user && history) {
+      history.push("/");
+    } 
+  }, [history, user])
+
   const [gridView, setGridView] = React.useState(true);
 
   const handleRecordsView = (data) => {
     setGridView(data);
   };
   
-
   const Layout = ({ children, handleRecordsView, gridView }) => {
     return (
       <div className="layout">

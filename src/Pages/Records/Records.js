@@ -7,6 +7,7 @@ import RecordModal from "../../Components/RecordModal/RecordModal";
 import { getRecords } from "../../actions/records";
 
 import "./records.css";
+import { useHistory } from "react-router-dom";
 
 const Records = ({ gridView}) => {
 
@@ -18,6 +19,14 @@ const Records = ({ gridView}) => {
     
     const dispatch = useDispatch();
     
+    const history = useHistory();
+  
+    React.useEffect(() => {
+      if(user === null) {
+        history.push("/");
+      } 
+    }, [history, user])
+
     React.useEffect(() => {
         window.addEventListener("resize", () => {
             setScreenWidth(window.screen.width);
